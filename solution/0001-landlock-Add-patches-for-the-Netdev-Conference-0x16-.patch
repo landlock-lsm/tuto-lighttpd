@@ -1,27 +1,27 @@
-From 1b7ac3bdc024ce00c38c2da9c0c2a593224e1a66 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
-Date: Sun, 23 Oct 2022 21:22:18 +0200
+From 4f36c83eb069c43cf55ed580db75354afb856351 Mon Sep 17 00:00:00 2001
+From: Your Name <you@example.com>
+Date: Wed, 11 Jan 2023 16:46:05 +0000
 Subject: [PATCH] landlock: Add patches for the Netdev Conference 0x16 tutorial
 
 ---
- trunk/0001-landlock-Define-syscalls.patch     |  47 ++++++++
- trunk/0002-landlock-Add-TCP-bind-port.patch   |  52 +++++++++
+ 0001-landlock-Define-syscalls.patch           |  47 ++++++++
+ 0002-landlock-Add-TCP-bind-port.patch         |  52 +++++++++
  ...dd-a-ruleset_fd-to-the-server-struct.patch | 106 ++++++++++++++++++
- .../0004-landlock-Restrict-main-process.patch |  30 +++++
+ 0004-landlock-Restrict-main-process.patch     |  30 +++++
  ...andlock-Fix-restriction-with-prctl-2.patch |  42 +++++++
- trunk/PKGBUILD                                |  27 ++++-
- 6 files changed, 302 insertions(+), 2 deletions(-)
- create mode 100644 trunk/0001-landlock-Define-syscalls.patch
- create mode 100644 trunk/0002-landlock-Add-TCP-bind-port.patch
- create mode 100644 trunk/0003-landlock-Add-a-ruleset_fd-to-the-server-struct.patch
- create mode 100644 trunk/0004-landlock-Restrict-main-process.patch
- create mode 100644 trunk/0005-landlock-Fix-restriction-with-prctl-2.patch
+ PKGBUILD                                      |  20 +++-
+ 6 files changed, 296 insertions(+), 1 deletion(-)
+ create mode 100644 0001-landlock-Define-syscalls.patch
+ create mode 100644 0002-landlock-Add-TCP-bind-port.patch
+ create mode 100644 0003-landlock-Add-a-ruleset_fd-to-the-server-struct.patch
+ create mode 100644 0004-landlock-Restrict-main-process.patch
+ create mode 100644 0005-landlock-Fix-restriction-with-prctl-2.patch
 
-diff --git a/trunk/0001-landlock-Define-syscalls.patch b/trunk/0001-landlock-Define-syscalls.patch
+diff --git a/0001-landlock-Define-syscalls.patch b/0001-landlock-Define-syscalls.patch
 new file mode 100644
-index 000000000000..f99d9a0f836e
+index 0000000..f99d9a0
 --- /dev/null
-+++ b/trunk/0001-landlock-Define-syscalls.patch
++++ b/0001-landlock-Define-syscalls.patch
 @@ -0,0 +1,47 @@
 +From 8f034830ff2d89bb60718570ef0c47781eed4a7d Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
@@ -70,11 +70,11 @@ index 000000000000..f99d9a0f836e
 +-- 
 +2.38.1
 +
-diff --git a/trunk/0002-landlock-Add-TCP-bind-port.patch b/trunk/0002-landlock-Add-TCP-bind-port.patch
+diff --git a/0002-landlock-Add-TCP-bind-port.patch b/0002-landlock-Add-TCP-bind-port.patch
 new file mode 100644
-index 000000000000..9b3b6109c731
+index 0000000..9b3b610
 --- /dev/null
-+++ b/trunk/0002-landlock-Add-TCP-bind-port.patch
++++ b/0002-landlock-Add-TCP-bind-port.patch
 @@ -0,0 +1,52 @@
 +From acfddfe6cd5f9332df228c38f7ccc0e886542785 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
@@ -128,11 +128,11 @@ index 000000000000..9b3b6109c731
 +-- 
 +2.38.1
 +
-diff --git a/trunk/0003-landlock-Add-a-ruleset_fd-to-the-server-struct.patch b/trunk/0003-landlock-Add-a-ruleset_fd-to-the-server-struct.patch
+diff --git a/0003-landlock-Add-a-ruleset_fd-to-the-server-struct.patch b/0003-landlock-Add-a-ruleset_fd-to-the-server-struct.patch
 new file mode 100644
-index 000000000000..26bbbfd7db86
+index 0000000..26bbbfd
 --- /dev/null
-+++ b/trunk/0003-landlock-Add-a-ruleset_fd-to-the-server-struct.patch
++++ b/0003-landlock-Add-a-ruleset_fd-to-the-server-struct.patch
 @@ -0,0 +1,106 @@
 +From 51d4c3d6d595f0072bead628c7861dc3fe27e976 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
@@ -240,11 +240,11 @@ index 000000000000..26bbbfd7db86
 +-- 
 +2.38.1
 +
-diff --git a/trunk/0004-landlock-Restrict-main-process.patch b/trunk/0004-landlock-Restrict-main-process.patch
+diff --git a/0004-landlock-Restrict-main-process.patch b/0004-landlock-Restrict-main-process.patch
 new file mode 100644
-index 000000000000..27dc36933865
+index 0000000..27dc369
 --- /dev/null
-+++ b/trunk/0004-landlock-Restrict-main-process.patch
++++ b/0004-landlock-Restrict-main-process.patch
 @@ -0,0 +1,30 @@
 +From 7d22d0e50645e8e33e30e2264eca89e8a78deeb0 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
@@ -276,11 +276,11 @@ index 000000000000..27dc36933865
 +-- 
 +2.38.1
 +
-diff --git a/trunk/0005-landlock-Fix-restriction-with-prctl-2.patch b/trunk/0005-landlock-Fix-restriction-with-prctl-2.patch
+diff --git a/0005-landlock-Fix-restriction-with-prctl-2.patch b/0005-landlock-Fix-restriction-with-prctl-2.patch
 new file mode 100644
-index 000000000000..69dae2b6c798
+index 0000000..69dae2b
 --- /dev/null
-+++ b/trunk/0005-landlock-Fix-restriction-with-prctl-2.patch
++++ b/0005-landlock-Fix-restriction-with-prctl-2.patch
 @@ -0,0 +1,42 @@
 +From 09b8b80757c1e0b4200624db5f1c81ca905e7514 Mon Sep 17 00:00:00 2001
 +From: =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
@@ -324,11 +324,11 @@ index 000000000000..69dae2b6c798
 +-- 
 +2.38.1
 +
-diff --git a/trunk/PKGBUILD b/trunk/PKGBUILD
-index fb6f09aa60d5..84650c422262 100644
---- a/trunk/PKGBUILD
-+++ b/trunk/PKGBUILD
-@@ -16,17 +16,40 @@ optdepends=('libxml2: mod_webdav'
+diff --git a/PKGBUILD b/PKGBUILD
+index 689ccd8..9103571 100644
+--- a/PKGBUILD
++++ b/PKGBUILD
+@@ -16,7 +16,12 @@ optdepends=('libxml2: mod_webdav'
  backup=('etc/lighttpd/lighttpd.conf' 'etc/logrotate.d/lighttpd')
  options=('emptydirs')
  source=("https://download.lighttpd.net/lighttpd/releases-1.4.x/lighttpd-${pkgver}.tar.xz"{,.asc}
@@ -339,19 +339,10 @@ index fb6f09aa60d5..84650c422262 100644
 +        '0003-landlock-Add-a-ruleset_fd-to-the-server-struct.patch'
 +        '0004-landlock-Restrict-main-process.patch'
 +        '0005-landlock-Fix-restriction-with-prctl-2.patch')
- sha256sums=('7e04d767f51a8d824b32e2483ef2950982920d427d1272ef4667f49d6f89f358'
+ sha256sums=('e56f37ae52b63e1ada4d76ce78005affb6e56eea2f6bdb0ce17d6d36e9583384'
              'SKIP'
              '41f6c0042bb61021553779f861910e335834f6c15e4411756cdc6233b31076fe'
-             'fece4581bebf39768571962dedce176b2b5f487c0abb5c1cfb35395de216c01f'
-             'd8a185145a7c08b4fd8c8e6c12dae3e176389dd9b1c66e239757b2ba5108c871'
--            '0c88403364e732c06090f6807105dedbac25aa82add0499d28007f8aaa780b78')
-+            '0c88403364e732c06090f6807105dedbac25aa82add0499d28007f8aaa780b78'
-+            'd97841f7715ab1aa5732c55885856d7101d61a14887a2f845beeaaff119ab7b9'
-+            '1ae9c9f7c0e9bd26da4c5a7811497c3d6ab2c1c2e7fd22f68928c75c6a09612c'
-+            '33aa5ca87df1955f055d953c231feaaf957094f949729b991fcd487967ca32cc'
-+            'a1e5b1194e431667054da24c86d677b00bde35d6c44e8141b369c3e03f3af157'
-+            '5b736b7a497d819d959d56a221f32d9bdd152cf9294ff85ee7e9274874fcca21')
- validpgpkeys=('C7CA1E9E29DC77F5480894B2E0E7D0171E95BAD7'
+@@ -27,6 +32,19 @@ validpgpkeys=('C7CA1E9E29DC77F5480894B2E0E7D0171E95BAD7'
                '649D0DD767FF206202A76C5158F14A786FE198C8'
                'EAAF41A8BE3BB8D001CACD136DE62CA242909B84')
  
@@ -372,5 +363,5 @@ index fb6f09aa60d5..84650c422262 100644
  	cd "$srcdir/$pkgname-$pkgver"
  
 -- 
-2.38.1
+2.39.0
 
