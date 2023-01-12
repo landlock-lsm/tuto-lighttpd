@@ -10,7 +10,7 @@ cd "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")"
 set -x
 
 sudo pacman -Sy --noconfirm
-sudo pacman -S --noconfirm base-devel asp bash-completion vim tmux tree git openbsd-netcat strace cscope lighttpd fcgi php-cgi
+sudo pacman -S --noconfirm base-devel asp bash-completion vim tmux tree git openbsd-netcat strace cscope lighttpd fcgi php-cgi pacman-contrib
 
 sudo cp -b vmlinuz-landlock-net /boot/vmlinuz-linux
 sudo cp -b config/lighttpd.conf /etc/lighttpd/lighttpd.conf
