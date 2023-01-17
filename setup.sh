@@ -1,22 +1,34 @@
 #!/usr/bin/env bash
 #
-# Landlock tutorial at Netdev conferencence 0x16
-# https://netdevconf.info/0x16/session.html?How-to-sandbox-a-network-application-with-Landlock
+# Landlock tutorial to patch lighttpd
 
-set -ueo pipefail
+set -ueo pipefail nounset errexit
 
 cd "$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]}")")"
 
 set -x
 
-sudo pacman -Sy --noconfirm
-sudo pacman -S --noconfirm base-devel asp bash-completion vim tmux tree git openbsd-netcat strace cscope lighttpd fcgi php-cgi pacman-contrib
+pacman -Sy --noconfirm
+pacman -S --noconfirm base-devel asp bash-completion vim tmux tree git openbsd-netcat strace cscope lighttpd fcgi php-cgi pacman-contrib liburing lua mariadb-libs
 
-sudo cp --no-preserve=mode -b vmlinuz-landlock-net /boot/vmlinuz-linux
-sudo cp --no-preserve=mode -b config/lighttpd.conf /etc/lighttpd/lighttpd.conf
-sudo cp --no-preserve=mode -b config/php.ini /etc/php/php.ini
-sudo cp --no-preserve=mode -b landlock.h /usr/include/linux/landlock.h
-sudo cp --no-preserve=mode web/*.php /srv/http/
-cp --no-preserve=mode vimrc ~/.vimrc
+pushd /vagrant/
+	cp --no-preserve=mode -b vmlinuz-landlock-net /boot/vmlinuz-linux
+	cp --no-preserve=mode -b config/lighttpd.conf /etc/lighttpd/lighttpd.conf
+	cp --no-preserve=mode -b config/php.ini /etc/php/php.ini
+	cp --no-preserve=mode -b landlock.h /usr/include/linux/landlock.h
+	cp --no-preserve=mode web/*.php /srv/http/
+	cp --no-preserve=mode vimrc ~/.vimrc
+popd
 
-sudo systemctl enable --now lighttpd.service
+sudo -u vagrant -s <<--
+pushd /home/vagrant/
+	asp update
+	asp checkout lighttpd
+	pushd lighttpd/trunk
+		gpg --import keys/pgp/*.asc
+		makepkg -si --noconfirm
+	popd
+popd
+-
+
+systemctl enable --now lighttpd.service
