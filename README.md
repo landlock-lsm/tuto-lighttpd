@@ -40,8 +40,17 @@ Start libvirtd if needed:
 systemctl start libvirtd.service
 ```
 
-It is possible that your Linux distribution don't configure your user for libvirt use by default.
-If it's not the case, you should configure it following your distribution recommendations.
+We then need to allow the developer (an unprivileged user) to use libvirt thanks to a dedicated group:
+```bash
+usermod -a -G libvirt <user>
+```
+
+This group update will take effect the next time the user logs in.
+Alternatively, the user can update a shell session with:
+```bash
+exec newgrp libvirt
+exec newgrp
+```
 
 ## Create and start the VM
 
