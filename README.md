@@ -4,12 +4,12 @@ Network access-control is well covered by different kind of firewalls, but for s
 For instance, only some processes of web browsers or web servers may legitimately be allowed to share data over the network, while other processes should be blocked.
 Linux provides some mechanisms to do so, including SELinux or AppArmor, but until now it has not been possible for applications to safely sandbox themselves.
 
-# Install tools
+## Install tools
 
 For this tutorial, we will use Vagrant to set up a dedicated virtual machine (VM).
 Run the following commands as root according to your Linux distribution.
 
-## Arch Linux
+### Arch Linux
 
 ```bash
 # pacman -S vagrant libvirt base-devel dnsmasq
@@ -18,7 +18,7 @@ Run the following commands as root according to your Linux distribution.
 
 See the [Arch Linux libvirt tutorial](https://wiki.archlinux.org/title/libvirt) for more details.
 
-## Debian or Ubuntu
+### Debian or Ubuntu
 
 ```bash
 # apt install --no-install-recommends vagrant qemu-utils ruby-libvirt ruby-dev libvirt-daemon-system qemu-system
@@ -26,14 +26,14 @@ See the [Arch Linux libvirt tutorial](https://wiki.archlinux.org/title/libvirt) 
 
 See the [Debian KVM tutorial](https://wiki.debian.org/KVM) for more details.
 
-## Fedora
+### Fedora
 
 ```bash
 # dnf install vagrant qemu libvirt
 # systemctl enable --now virtnetworkd
 ```
 
-# Start the VM manager
+## Start the VM manager
 
 Start libvirtd if needed:
 ```bash
@@ -43,7 +43,7 @@ Start libvirtd if needed:
 It is possible that your Linux distribution don't configure your user for libvirt use by default.
 If it's not the case, you should configure it following your distribution recommendations.
 
-# Create and start the VM
+## Create and start the VM
 
 As an unprivileged user, clone this repository:
 ```bash
@@ -60,13 +60,13 @@ $ vagrant up
 A virbr network interface will be created.
 On most systems this should work as is, but otherwise we may need to allow inbound connections (and routing) from the loopback interface according to host's firewall rules.
 
-# Connect to the VM
+## Connect to the VM
 
 ```bash
 $ vagrant ssh
 ```
 
-# Test the VM
+## Test the VM
 
 On the VM, start the lighttpd service and check the logs:
 ```bash
