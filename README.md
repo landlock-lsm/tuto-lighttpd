@@ -7,13 +7,13 @@ Linux provides some mechanisms to do so, including SELinux or AppArmor, but unti
 ## Install tools
 
 For this tutorial, we will use Vagrant to set up a dedicated virtual machine (VM).
-Run the following commands as root according to your Linux distribution.
+Run the following commands as **root** according to your Linux distribution.
 
 ### Arch Linux
 
 ```bash
-# pacman -S vagrant libvirt base-devel dnsmasq
-# systemctl enable --now libvirtd.service
+pacman -S vagrant libvirt base-devel dnsmasq
+systemctl enable --now libvirtd.service
 ```
 
 See the [Arch Linux libvirt tutorial](https://wiki.archlinux.org/title/libvirt) for more details.
@@ -21,7 +21,7 @@ See the [Arch Linux libvirt tutorial](https://wiki.archlinux.org/title/libvirt) 
 ### Debian or Ubuntu
 
 ```bash
-# apt install --no-install-recommends vagrant qemu-utils ruby-libvirt ruby-dev libvirt-daemon-system qemu-system
+apt install --no-install-recommends vagrant qemu-utils ruby-libvirt ruby-dev libvirt-daemon-system qemu-system
 ```
 
 See the [Debian KVM tutorial](https://wiki.debian.org/KVM) for more details.
@@ -29,15 +29,15 @@ See the [Debian KVM tutorial](https://wiki.debian.org/KVM) for more details.
 ### Fedora
 
 ```bash
-# dnf install vagrant qemu libvirt
-# systemctl enable --now virtnetworkd
+dnf install vagrant qemu libvirt
+systemctl enable --now virtnetworkd
 ```
 
 ## Start the VM manager
 
 Start libvirtd if needed:
 ```bash
-# systemctl start libvirtd.service
+systemctl start libvirtd.service
 ```
 
 It is possible that your Linux distribution don't configure your user for libvirt use by default.
@@ -45,16 +45,16 @@ If it's not the case, you should configure it following your distribution recomm
 
 ## Create and start the VM
 
-As an unprivileged user, clone this repository:
+As an **unprivileged user**, clone this repository:
 ```bash
-$ git clone https://github.com/landlock-lsm/tuto-lighttpd
-$ cd tuto-lighttpd
+git clone https://github.com/landlock-lsm/tuto-lighttpd
+cd tuto-lighttpd
 ```
 
 The Vagrant VM provisioning will install 3 vagrant plugins on the host system, other commands are executed in the VM.
 After plugins installation Vagrant will ask to execute the same command again to proceed the VM configuration:
 ```bash
-$ vagrant up
+vagrant up
 ```
 
 A virbr network interface will be created.
@@ -63,21 +63,21 @@ On most systems this should work as is, but otherwise we may need to allow inbou
 ## Connect to the VM
 
 ```bash
-$ vagrant ssh
+vagrant ssh
 ```
 
 ## Test the VM
 
 On the VM, start the lighttpd service and check the logs:
 ```bash
-$ sudo systemctl start lighttpd.service
-$ sudo journalctl -fu lighttpd.service &
-$ sudo tail -F /var/log/lighttpd/error.log &
+sudo systemctl start lighttpd.service
+sudo journalctl -fu lighttpd.service &
+sudo tail -F /var/log/lighttpd/error.log &
 ```
 
 Use the `getlink.sh` script to get the local website link:
 ```bash
-$ /vagrant/getlink.sh
+/vagrant/getlink.sh
 ```
 
 Visit the link with a web browser to validate that it works.
