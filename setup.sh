@@ -32,3 +32,4 @@ popd
 -
 
 systemctl enable --now lighttpd.service
+systemctl disable --now systemd-time-wait-sync.service
