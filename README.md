@@ -4,6 +4,8 @@ Network access-control is well covered by different kind of firewalls, but for s
 For instance, only some processes of web browsers or web servers may legitimately be allowed to share data over the network, while other processes should be blocked.
 Linux provides some mechanisms to do so, including SELinux or AppArmor, but until now it has not been possible for applications to safely sandbox themselves.
 
+Slides: [How to sandbox an application with Landlock](How%20to%20sandbox%20an%20application%20with%20Landlock.pdf)
+
 ## Install tools
 
 For this tutorial, we will use Vagrant to set up a dedicated virtual machine (VM).
