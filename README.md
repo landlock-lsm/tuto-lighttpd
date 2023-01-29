@@ -50,8 +50,7 @@ usermod -a -G libvirt <user>
 This group update will take effect the next time the user logs in.
 Alternatively, the user can update a shell session with:
 ```bash
-exec newgrp libvirt
-exec newgrp
+su $USER
 ```
 
 ## Create and start the VM
