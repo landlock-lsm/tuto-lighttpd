@@ -9,8 +9,12 @@
 </br>
 </br>
 <?php
-$file = $_GET['content'];
-include($file);
+
+$file = &$_GET['content'];
+if (isset($file)) {
+	include($file);
+}
+
 ?>
 </body>
 </html>
